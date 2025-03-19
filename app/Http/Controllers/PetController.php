@@ -9,7 +9,6 @@ use function Pest\Laravel\json;
 
 class PetController extends Controller
 {
-    //
 
     public function addPet(Request $request){
 
@@ -40,8 +39,6 @@ class PetController extends Controller
                 'status' => $status
                 
             ]);
-
-            // Wybór większej ilości danych
 
             if($response->successful()){
 
@@ -92,7 +89,6 @@ class PetController extends Controller
 {
     $editId = $request->input('editId');
 
-    // Pobranie obecnych danych peta przed edycją
     $getResponse = Http::withHeaders(['Accept' => 'application/json'])
                         ->get("https://petstore.swagger.io/v2/pet/{$editId}");
 
@@ -102,7 +98,6 @@ class PetController extends Controller
 
     $beforeEditData = $getResponse->json();
 
-    // Przygotowanie danych do aktualizacji - zmiana tylko przesłanych pól
     $updatedData = [
         'id' => $editId,
         'name' => $request->filled('editName') ? $request->input('editName') : ($beforeEditData['name'] ?? 'not set'),
@@ -120,12 +115,12 @@ class PetController extends Controller
         'photoUrls' => $beforeEditData['photoUrls'] ?? ["string"],
     ];
 
-    // Wysłanie danych PUT
+
     $response = Http::withHeaders(['Accept' => 'application/json'])
                     ->put('https://petstore.swagger.io/v2/pet', $updatedData);
 
     if ($response->successful()) {
-        // Pet po edycji
+
         $afterEditData = $response->json();
 
         return redirect()->route('pets.index')
