@@ -35,12 +35,12 @@
 @endif
 
 @if(session('beforeEdit'))
-    <h3>Pet przed edycją:</h3>
+    <h3>Pet before edit:</h3>
     <pre>{{ json_encode(session('beforeEdit'), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) }}</pre>
 @endif
 
 @if(session('afterEdit'))
-    <h3>Pet po edycji:</h3>
+    <h3>Pet after edit:</h3>
     <pre>{{ json_encode(session('afterEdit'), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) }}</pre>
 @endif
 
