@@ -15,22 +15,36 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Przekierowanie do formularzy
+
 Route::get('/', function () {
     return redirect('/pets');
 });
+
+// Zwrócenie widoku
 
 Route::get('/pets', function() {
     return view('pets.pets');
 });
 
+// Zwrócenie widoku z wynikiem formularzy
+
 Route::get('/pets', function(){
     return view('pets.pets');
 })->name('pets.index');
 
+// Ścieżka do Kontrolera PetController i funkcji addPet()
+
 Route::post('/pets', [PetController::class, 'addPet'])->name('pets.addPet');
+
+// Ścieżka do Kontrolera PetController i funkcji findPet()
 
 Route::post('/pets/find', [PetController::class, 'findPet'])->name('pets.findPet');
 
+// Ścieżka do Kontrolera PetController i funkcji deletePet()
+
 Route::delete('/pets/delete', [PetController::class, 'deletePet'])->name('pets.deletePet');
+
+// Ścieżka do Kontrolera PetController i funkcji editPet()
 
 Route::put('/pets/edit', [PetController::class, 'editPet'])->name('pets.editPet');

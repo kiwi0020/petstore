@@ -1,5 +1,7 @@
 
-<h2>Status of operations: </h2>
+<!-- Wyświetlenie statusu operacji -->
+
+<h2>Status of operation: </h2>
 
 @if(session('success'))
     <p>{{ session('success') }}</p>
@@ -7,6 +9,10 @@
 
 @if(session('error'))
     <p>{{ session('error') }}</p>
+@endif
+
+@if(session('delId'))
+    <p>ID: {{ session('delId') }}</p>
 @endif
 
 @if(session('petData'))
@@ -44,6 +50,7 @@
     <pre>{{ json_encode(session('afterEdit'), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) }}</pre>
 @endif
 
+<!-- Formularz dodania Peta, routowany do kontrolera PetController oraz funkcji addPet() -->
 
 <h1>Add</h1>
 <form action="{{ route('pets.addPet') }}" method="post">
@@ -67,6 +74,8 @@
     <button type="submit">Add pet</button>
 </form>
 
+<!-- Formularz znalezienia Peta, routowany do kontrolera PetController oraz funkcji findPet() -->
+
 <h1>Find</h1>
 <form action="{{ route('pets.findPet') }}" method="post">
     @csrf
@@ -74,6 +83,8 @@
     <input type="number" name="petId" id="petId">
     <button type="submit">Find pet</button>
 </form>
+
+<!-- Formularz edytowania Peta, routowany do kontrolera PetController oraz funkcji editPet() -->
 
 <h1>Edit</h1>
 <form action="{{ route('pets.editPet') }}" method="post">
@@ -97,6 +108,8 @@
     <input type="text" name="editTagName" id="editTagName">
     <button type="submit">Edit pet</button>
 </form>
+
+<!-- Formularz usunięcia Peta, routowany do kontrolera PetController oraz funkcji deletePet() -->
 
 <h1>Delete</h1>
 <form action="{{ route('pets.deletePet') }}" method="post">
